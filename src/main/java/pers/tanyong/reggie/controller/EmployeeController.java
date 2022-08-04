@@ -44,6 +44,7 @@ public class EmployeeController {
             return R.error("账号已禁用");
         }
 
+        // 设置状态
         request.getSession().setAttribute("employee", emp.getId());
         return R.success(emp);
     }
@@ -64,16 +65,17 @@ public class EmployeeController {
         log.info("新增员工，员工信息：{}", employee.toString());
         // 设置初始密码
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes(StandardCharsets.UTF_8)));
-        // 创建时间
-        employee.setCreateTime(LocalDateTime.now());
-        // 更新时间
-        employee.setUpdateTime(LocalDateTime.now());
-
-        // 获取当前登陆用户的ID
-        Long employeeId = (Long) request.getSession().getAttribute("employee");
-
-        employee.setCreateUser(employeeId);
-        employee.setUpdateUser(employeeId);
+//        // 创建时间
+//        employee.setCreateTime(LocalDateTime.now());
+//        // 更新时间
+//        employee.setUpdateTime(LocalDateTime.now());
+//
+//        // 获取当前登陆用户的ID
+//        Long employeeId = (Long) request.getSession().getAttribute("employee");
+//
+//        employee.setCreateUser(employeeId);
+//
+//        employee.setUpdateUser(employeeId);
 
         employeeService.save(employee);
 
@@ -96,5 +98,25 @@ public class EmployeeController {
         employeeService.page(pageInfo, queryWrapper);
 
         return R.success(pageInfo);
+    }
+
+    @PutMapping
+    public R<String> update(HttpServletRequest request, @RequestBody Employee employee){
+        log.info(employee.toString());
+        Long empId = (Long) request.getSession().getAttribute("employee");
+//        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setUpdateUser(empId);
+//        employeeService.updateById(employee);
+        return R.success("员工修改成功");
+    }
+
+    @GetMapping("/{id}")
+    public R<Employee> getById(@PathVariable Long id){
+        log.info("根据ID查询");
+        Employee employee = employeeService.getById(id);
+        if(employee != null){
+            return R.success(employee);
+        }
+        return R.error("没有查询到员工信息");
     }
 }

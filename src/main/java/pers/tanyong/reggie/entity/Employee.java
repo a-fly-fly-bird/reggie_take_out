@@ -29,11 +29,12 @@ public class Employee implements Serializable {
 
     private Integer status;
 
+    @TableField(fill = FieldFill.INSERT) // 插入时填充
     private LocalDateTime createTime;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE) // 插入和更新时填充
     private LocalDateTime updateTime;
 
-    // 这个注解暂时没讲
     @TableField(fill = FieldFill.INSERT)
     private Long createUser;
 
