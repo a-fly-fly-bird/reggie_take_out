@@ -13,7 +13,6 @@ import pers.tanyong.reggie.service.EmployeeService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
@@ -103,10 +102,12 @@ public class EmployeeController {
     @PutMapping
     public R<String> update(HttpServletRequest request, @RequestBody Employee employee){
         log.info(employee.toString());
-        Long empId = (Long) request.getSession().getAttribute("employee");
+        Long id = Thread.currentThread().getId();
+        log.info("线程ID为{}", id);
+//        Long empId = (Long) request.getSession().getAttribute("employee");
 //        employee.setUpdateTime(LocalDateTime.now());
 //        employee.setUpdateUser(empId);
-//        employeeService.updateById(employee);
+        employeeService.updateById(employee);
         return R.success("员工修改成功");
     }
 
