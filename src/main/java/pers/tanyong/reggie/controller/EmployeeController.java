@@ -85,7 +85,7 @@ public class EmployeeController {
     public R<Page> page(int page, int pageSize, String name){
         log.info("page={}, pageSize={},name={}", page, pageSize, name);
         // 分页构造器
-        Page pageInfo = new Page(page, pageSize);
+        Page<Employee> pageInfo = new Page(page, pageSize);
         // 条件构造器
         LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper();
         // 添加过滤条件

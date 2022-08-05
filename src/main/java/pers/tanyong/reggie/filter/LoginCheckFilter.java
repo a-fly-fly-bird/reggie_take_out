@@ -31,6 +31,7 @@ public class LoginCheckFilter implements Filter {
         String[] urls = new String[]{
                 "/employee/login",
                 "/employee/logout",
+                "/common/**",
                 // 静态资源可以放行
                 "/backend/**",
                 "/frontend/**"
