@@ -39,5 +39,5 @@ cd target
 
 echo 启动项目
 # shellcheck disable=SC2039
-nohup java -jar helloworld-1.0-SNAPSHOT.jar &> helloworld.log &
+nohup java -jar reggie_take_out-1.0-SNAPSHOT.jar &> helloworld.log &
 echo 项目启动完成
