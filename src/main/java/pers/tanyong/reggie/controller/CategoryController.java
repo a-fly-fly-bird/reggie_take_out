@@ -9,6 +9,8 @@ import pers.tanyong.reggie.common.R;
 import pers.tanyong.reggie.entity.Category;
 import pers.tanyong.reggie.service.CategoryService;
 
+import java.util.List;
+
 /**
  * 分类管理
  */
@@ -52,5 +54,19 @@ public class CategoryController {
     public R<String> update(@RequestBody Category category){
         categoryService.updateById(category);
         return R.success("修改分类信息成功");
+    }
+
+    /**
+     * 根据条件查询分类数据
+     * @param category
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Category>> list(Category category){
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(category.getType() != null, Category::getType, category.getType());
+        queryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
+        List<Category> list = categoryService.list(queryWrapper);
+        return R.success(list);
     }
 }
