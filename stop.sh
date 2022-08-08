@@ -8,3 +8,4 @@ if [ ${tpid} ]; then
     echo 'Stop Process...'
     kill -15 $tpid
 fi
+echo 停止成功
