@@ -59,5 +59,11 @@ mybatis-plus:
       id-type: ASSIGN_ID
 
 # 自定义参数
+# Swagger
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+
 reggie:
   path: /Users/tanyong/Desktop/dir/
