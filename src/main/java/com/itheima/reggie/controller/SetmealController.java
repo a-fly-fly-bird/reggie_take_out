@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,6 +60,7 @@ public class SetmealController {
      * @return
      */
     @GetMapping("/page")
+    @Transactional
     public R<Page> page(int page,int pageSize,String name){
         //分页构造器对象
         Page<Setmeal> pageInfo = new Page<>(page,pageSize);
@@ -114,7 +117,9 @@ public class SetmealController {
      * @param setmeal
      * @return
      */
+    @Cacheable(value = "setmealCache", key = "#setmeal.categoryId + '_' + #setmeal.status")
     @GetMapping("/list")
+    @Transactional
     public R<List<Setmeal>> list(Setmeal setmeal){
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(setmeal.getCategoryId() != null,Setmeal::getCategoryId,setmeal.getCategoryId());
