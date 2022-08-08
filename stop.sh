@@ -5,7 +5,7 @@ APP_NAME=helloworld
 # shellcheck disable=SC2009
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
 
-echo "程序的tpid是：${tpid}"
+echo "程序的tpid是：$tpid"
 
 if [ ${tpid} ]; then
     echo 'Stop Process...'
