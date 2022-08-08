@@ -9,9 +9,9 @@ APP_NAME=helloworld
 # shellcheck disable=SC2006
 # shellcheck disable=SC2009
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ]; then
+if [ "${tpid}" ]; then
     echo 'Stop Process...'
-    kill -15 $tpid
+    kill -15 "$tpid"
 fi
 sleep 2
 # shellcheck disable=SC2006
@@ -19,7 +19,7 @@ sleep 2
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
 if [ "${tpid}" ]; then
     echo 'Kill Process!'
-    kill -9 $tpid
+    kill -9 "$tpid"
 else
     echo 'Stop Success!'
 fi

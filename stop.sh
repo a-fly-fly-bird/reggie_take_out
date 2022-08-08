@@ -7,8 +7,8 @@ tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
 
 echo "程序的tpid是：$tpid"
 
-if [ ${tpid} ]; then
+if [ "${tpid}" ]; then
     echo 'Stop Process...'
-    kill -15 $tpid
+    kill -15 "$tpid"
 fi
 echo 停止成功
